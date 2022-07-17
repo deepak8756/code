@@ -1,0 +1,92 @@
+//1  CIRCULAR LINKED LIST   SINGLY KE THROUGH....sab kuch insertion deletion.............................................
+//circular linked list meeh tail ke through hi insertion print sab kuch krate hai
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+
+void insertnode(Node* &tail,int position,int data){
+    if(tail==NULL){
+        Node* node1=new Node(data);
+        tail=node1;
+        node1->next=node1;
+    }
+    else{
+        Node* temp=tail;
+      
+        while(temp->data!=position){
+            temp=temp->next;
+        }
+        Node* insert=new Node(data);
+        insert->next=temp->next;
+        temp->next=insert;
+
+    }
+}
+
+void deletenode(Node* &tail,int value){
+    Node* prev=tail;
+    Node* current=prev->next;
+
+    while(current->data!=value){
+        prev=current;
+        current=current->next;
+    }
+    prev->next=current->next;
+    if(current==tail){
+        tail=prev;
+    }
+    current->next=NULL;
+    delete current;
+
+}
+
+
+void print(Node* tail){
+Node* temp=tail;
+    do{
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }while(temp!=tail);
+    cout<<endl;
+}
+int main()
+{
+    Node* tail=NULL;
+    insertnode(tail,0,10);
+    print(tail);
+    insertnode(tail,10,20);
+    print(tail);
+    insertnode(tail,20,30);
+    print(tail);
+    insertnode(tail,10,100);
+    print(tail);
+     insertnode(tail,30,40);
+    print(tail);
+     insertnode(tail,40,70);
+    print(tail);
+
+
+    deletenode(tail,30);
+    print(tail);
+    deletenode(tail,20);
+    print(tail);
+     deletenode(tail,70);
+    print(tail);
+
+     deletenode(tail,10);
+    print(tail);
+    
+
+
+    return 0;
+}
