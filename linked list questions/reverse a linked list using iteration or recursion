@@ -1,0 +1,153 @@
+// QUESTION 1:  REVERSE A LINKED LIST..using iteration..................................................
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+   public:
+   int data;
+   Node* next;
+
+   Node(int data){
+      this->data=data;
+      this->next=NULL;
+   }
+};
+
+void insertAtTail(Node* &tail,int data){
+   Node* temp=new Node(data);
+
+   tail->next=temp;
+   tail=temp;
+}
+
+void print(Node* head){
+   Node* temp=head;
+
+   while(temp!=NULL){
+      cout<<temp->data<<" ";
+      temp=temp->next;
+   }
+   cout<<endl;
+}
+
+void reverse(Node* &head,Node* &tail){
+   Node* prev=NULL;
+   Node* current=head;
+   Node* forward=NULL;
+
+   while(current!=NULL){//10'20'30'40'50'60'70'NULL->condition false
+   forward=current->next;//.20'30'40'50'60'70'NULL
+   current->next=prev;//10->NULL'20->10'30->20'40->30'50->40'60->50'70->60
+   prev=current;//10'20'30'40'50'60'70'
+   current=forward;//.20'30'40'50'60'70'NULL
+   }
+   if(current==NULL){
+      head=prev;
+   }
+   print(head);
+   
+
+}
+
+int main()
+{
+   Node* node1=new Node(10);
+   Node* head=node1;
+   Node* tail=node1;
+
+   insertAtTail(tail,20);
+   print(head);
+    insertAtTail(tail,30);
+   print(head);
+
+    insertAtTail(tail,40);
+   print(head);
+    insertAtTail(tail,50);
+   print(head);
+    insertAtTail(tail,60);
+   print(head);
+    insertAtTail(tail,70);
+   print(head);
+   //----------------------------------
+   reverse(head,tail);
+   return 0;
+}
+//--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+//using recursion
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+
+void insertAtTail(Node* &tail,int data){
+    Node* temp=new Node(data);
+
+    tail->next=temp;
+    tail=temp;
+
+}
+
+void print(Node* head){
+    Node* temp=head;
+
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+void recurse(Node* &head,Node* current,Node* prev){
+    if(current==NULL){
+        head=prev;
+        return;
+    }
+    Node* forward=current->next;
+    recurse(head,forward,current);
+    current->next=prev;
+
+
+}
+void reverse(Node* &head){
+    Node* prev=NULL;
+    Node* current=head;
+   
+    recurse(head,current,prev);
+    print(head);
+}
+
+int main()
+{
+    Node* node1=new Node(10);
+    Node* head=node1;
+    Node* tail=node1;
+    insertAtTail(tail,20);
+    print(head);
+    insertAtTail(tail,30);
+    print(head);
+    insertAtTail(tail,40);
+    print(head);
+    insertAtTail(tail,50);
+    print(head);
+    insertAtTail(tail,60);
+    print(head);
+    reverse(head);
+
+    return 0;
+}
