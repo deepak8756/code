@@ -1,0 +1,126 @@
+//1   DELETION KAISE KRENGE PURRA ISSI MEEH HAI singly linked list                             
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+
+};
+//  ---HEAD SEE INSERT KE LIYE FUNCTION
+void insertAtHead(Node* &head,int d){
+    Node* temp=new Node(d);
+
+    temp->next=head;
+    head=temp;
+
+}
+//        end hogya yha function                             
+
+
+// ---TAIL SEE INSERT KRNE KE LIYE FUNCTION--------------
+void insertAtTail(Node* &tail,int v){
+    Node* temp=new Node(v);
+
+    tail->next=temp;
+    tail=temp;
+}
+//       end hogya yha function       
+
+
+void deleteNode(int position,Node* &head){
+    //deleting first node only means head node
+       if(position==1){
+         Node* temp=head;
+        head=head->next;
+        //memory free krdo abb pehle wale ki
+        temp->next=NULL; //iska kaam nhi but ye mere abhi bhi uss eleemnt ko point kr rha hai
+        //isliye iske next ko null kiya;
+        delete temp;
+    }
+
+    //delete middle node OR last node 
+    else{
+        Node* current=head;
+        Node* prev=NULL;
+        int count=1;
+
+        while(count<position){
+            prev=current;
+            current=current->next;
+            count++;
+        }
+
+        prev->next=current->next;
+
+        current->next=NULL;//node abhi b point krr rhi hogi apne next ko isliye null kiya
+        // meeh nhi chahta jo node meeh dlt kr rha hu wo mere koi data ko point kre
+        delete current;
+
+    }
+
+   
+}
+
+
+
+
+void print(Node* &head)
+{
+    Node* temp=head;
+    
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+
+int main()
+{
+    Node* node1=new Node(10);
+
+    Node* head=node1;
+    Node* tail=node1;
+
+//-------INSERT AT HEAD------
+    // insertAtHead(head,24);
+    // print(head);
+    // insertAtHead(head,56);
+    // print(head);
+    // insertAtHead(head,78);
+    // print(head);
+    // insertAtHead(head,98);
+    // print(head);
+    // insertAtHead(head,12);
+    // print(head);
+// -------INSERT AT HEAD YHA KHTAM---
+
+//  ---INSERT AT TAIL--             
+    insertAtTail(tail,24);
+    print(head);
+    insertAtTail(tail,56);
+    print(head);
+    insertAtTail(tail,78);
+    print(head);
+    insertAtTail(tail,98);
+    print(head);
+    insertAtTail(tail,12);
+    print(head);
+//          --Insert at tail YHA KHATAM--- 
+
+    deleteNode(3,head);//koi bhi node delete krdo krega
+    print(head);
+    //bass agar last node delete kr rhe ho agar to tail mera garbage value dega to last ke
+    //pehle wale ko tail bnado ye krna hai abhi..bass aur sab ho gya hai
+
+
+
+    return 0;
+}
