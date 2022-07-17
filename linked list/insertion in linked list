@@ -1,0 +1,145 @@
+//1 singly linked list insertionhar trike kaFULL ASSIGNMENT->(JITNA ABHI TAAK SEEKHA HAI ISKO DEKHLO )                                 
+// har trike ka insertion ha isme head see ya tail se insert ya middle meeh kuch dalna ho 
+//start meeh kuch dalno ho koi node ko ya last meeh koi node ko dalna ho
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+
+};
+//  ---HEAD SEE INSERT KE LIYE FUNCTION
+void insertAtHead(Node* &head,int d){
+    Node* temp=new Node(d);
+
+    temp->next=head;
+    head=temp;
+
+}
+//       end hogya yha function                             
+
+
+// ---TAIL SEE INSERT KRNE KE LIYE FUNCTION--------------
+void insertAtTail(Node* &tail,int v){
+    Node* temp=new Node(v);
+
+    tail->next=temp;
+    tail=temp;
+}
+//      end hogya yha function       
+
+
+//INSERT AT MID OR INSERT AT START OR INSERT AT TAIL USING HEAD FUNCTION KE INPUTS MEEH
+void insertList(Node* &head, Node* &tail,int position,int value){
+
+    //agar position first agai to kya krenge using head function;
+    if(position==1){
+        insertAtHead(head,value);
+        return;
+    }
+    //--------------------------------------------------------
+    //agar start meeh linked list lgana hai to head function hi to call kroge na tail see thodi
+    //hoga->head ek trka hai jo linked kist ko ulta output derha hai but yha first position par
+    //mujhe new node jodni hai to head krdega ye start par
+   
+
+
+
+//-----------------------------------------------
+    Node*temp=head;
+
+    int counter=1;
+
+    while(counter<position-1){
+        temp=temp->next;
+        counter++;
+    }
+    //.last node ko tail jo bnana tha ussi ke liye condition
+    if(temp->next==NULL){
+        insertAtTail(tail,value);
+        return;
+    }
+
+    Node* insertion=new Node(value);
+    insertion->next=temp->next;
+    temp->next=insertion;
+
+
+}
+
+
+
+
+void print(Node* &head)
+{
+    Node* temp=head;
+    
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+
+int main()
+{
+    Node* node1=new Node(10);
+
+    Node* head=node1;
+    Node* tail=node1;
+
+//-------INSERT AT HEAD------//AGAR HEAD SEE INSERT KRNA HAI TO ISSE COMMENT OUT KRO
+    // insertAtHead(head,24);
+    // print(head);
+    // insertAtHead(head,56);
+    // print(head);
+    // insertAtHead(head,78);
+    // print(head);
+    // insertAtHead(head,98);
+    // print(head);
+    // insertAtHead(head,12);
+    // print(head);
+// -------INSERT AT HEAD YHA KHTAM---
+
+//  ---INSERT AT TAIL--          //AGAR TAIL SEE INSERT KRNA HAI TO ISSE COMMENT OUT KRO   
+    // insertAtTail(tail,24);
+    // print(head);
+    // insertAtTail(tail,56);
+    // print(head);
+    // insertAtTail(tail,78);
+    // print(head);
+    // insertAtTail(tail,98);
+    // print(head);
+    // insertAtTail(tail,12);
+    // print(head);
+//          --Insert at tail YHA KHATAM--- 
+
+
+//    insert at linked list in middle
+    insertList(head,tail,4,520);
+     print(head);
+
+// insert at linked list in first position using tail function.
+    insertList(head,tail,1,420);
+    print(head);
+
+// insert at last index
+    insertList(head,tail,9,620);
+    print(head);//par yha ye krne see element to last meeh add hojaega but mtlb tail ab wo hoga
+    // but tail last wala nhi bna hai abhi upar insert meeh condition dalna pdega last ko tail
+    //bnao jo new node insert kiya ho ..
+    cout<<"HEAD IS:-"<<head->data<<endl;
+    cout<<"TAIL IS:-"<<tail->data<<endl;//ye abhi bhi tail 12 ko dikha rha hai iss 620 ko nhi
+    //upar jao function meeh insert wale 
+    //abb sii hogya hai head aur tail;    
+
+
+    return 0;
+}
