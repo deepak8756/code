@@ -1,0 +1,85 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+
+void insertAtTail(Node* &tail,int data){
+    Node* temp=new Node(data);
+
+    tail->next=temp;
+    tail=temp;
+}
+void print(Node* head){
+    Node* temp=head;
+
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+
+
+Node* reverse1(Node* &head,int k){
+    
+    Node* prev=NULL;
+    Node* current=head;
+    Node* forward=NULL;
+    int count=0;
+
+    if(head==NULL){
+        return NULL;
+    } 
+
+    while(current!=NULL && count<k){
+        forward=current->next;
+        current->next=prev;
+        prev=current;
+        current=forward;
+        count++;
+    }
+
+    if(forward!=NULL){
+       head->next=reverse1(forward,k);
+    }
+    print(prev);
+    return prev ;
+}
+
+int main()
+{
+    Node* node1=new Node(10);
+    Node* head=node1;
+    Node* tail=node1;
+
+    insertAtTail(tail,20);
+    print(head);
+    insertAtTail(tail,30);
+    print(head);
+    insertAtTail(tail,40);
+    print(head);
+    insertAtTail(tail,50);
+    print(head);
+    insertAtTail(tail,60);
+    print(head);
+    insertAtTail(tail,70);
+    print(head);
+    int k;
+    cout<<"Enter k:"<<endl;
+    cin>>k;
+
+   
+    reverse1(head,k);
+   
+    return 0;
+}
