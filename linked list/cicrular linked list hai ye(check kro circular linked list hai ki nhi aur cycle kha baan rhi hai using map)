@@ -1,5 +1,6 @@
 //circular linked list hai ye check kro linked list hai ki nhi chahe singly ho ya doubly (aur cycle kha baan rhi hai wo jgah btao map seee kiya hai
 //waise to floyd's cycle detention algo see bhi kr skte hai but yha map see kiya hai
+//space O(n)-----TIME O(n)<-using map lagrha hai---------  space O(1) meeh kr skta hu using floyds cycle detention 
 #include<bits/stdc++.h>
 using namespace std;
 class Node{
