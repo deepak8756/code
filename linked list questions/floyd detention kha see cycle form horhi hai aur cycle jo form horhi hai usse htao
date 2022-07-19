@@ -1,0 +1,109 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+
+void insertAtTail(Node* &tail,int data){
+    Node* temp=new Node(data);
+    tail->next=temp;
+    tail=temp;
+}
+void print(Node* head){
+    Node* temp=head;
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+Node* floydDetention(Node* head){//pta kr rha hai kha pr intersection horha hai
+        Node* slow=head;
+        Node* fast=head;
+
+        while(slow!=NULL && fast!=NULL){ 
+            fast=fast->next;
+            if(fast!=NULL){
+                fast=fast->next;
+            }
+            slow =slow->next;
+
+            if(slow==fast){
+                cout<<"present at "<<slow->data<<endl;
+                return slow;
+            }
+
+        }
+    return NULL;
+}
+
+Node* cyclestart(Node* head){//kha see cycle start horhi hai wo btaega ye
+
+    if(head==NULL){
+        return NULL;
+    }
+    Node* intersection=floydDetention(head);//intersection ke andar wo value save krli 
+    //jo upar floyd wala return kr rha hai
+    Node* slow=head;//slow ek node bnao usse head kebrabar krdo fir dono ko sath chlao
+    //slow ko aur intersection ko jha meeh kar gae whi hai starting point 
+    //par usse pehle upar floyd detention see pta krlo intersect point
+    while(slow!=intersection){
+        slow=slow->next;
+        intersection=intersection->next;
+    }
+    return slow;
+}
+
+void removeofloop(Node* head){
+    Node* startofloop=cyclestart(head);//start of loop meeh wo aega jha see cycle baann na
+    //start horhi hai.
+    Node* temp=startofloop;//startofloop ko temp meeh dalke chlao jab tak wo fir see apne
+    //equal na jae mtlb cycle ghum ke aegi wapas see jaise hi ek piche rhegi whi temp rukega
+    while(temp->next!=startofloop){
+        temp=temp->next;
+    }
+    //temp ghum ke piche a gai hai startloop ke
+    temp->next=NULL;
+
+   
+}
+int main()
+{
+    Node* node1=new Node(10);
+    Node* head=node1;
+    Node* tail=node1;
+    insertAtTail(tail,20);
+    //print(head);
+    insertAtTail(tail,30);
+    //print(head);
+    insertAtTail(tail,40);
+    //print(head);
+    insertAtTail(tail,50);
+    //print(head);
+    insertAtTail(tail,60);
+    insertAtTail(tail,70);
+    insertAtTail(tail,80);
+    print(head);
+    tail->next=head->next;
+    //print(head);
+    floydDetention(head);
+    if(floydDetention!=NULL){
+        cout<<"cycle is present"<<endl;
+    }
+    else{
+        cout<<"cycle is not present"<<endl;
+    }
+    Node* loop=cyclestart(head);
+    cout<<"starting point is:"<<loop->data<<endl;
+    removeofloop(head);
+    print(head);
+    return 0;
+}
