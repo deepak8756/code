@@ -1,3 +1,6 @@
+//floyd's cycle detention
+//algorithm detect krta hai kha par fast aur slow intersect kr rhe hai
+//but ye nhi pta chaal rha ki starting point kha see tha jha see cycle ban na form hui hai
 #include<bits/stdc++.h>
 using namespace std;
 
