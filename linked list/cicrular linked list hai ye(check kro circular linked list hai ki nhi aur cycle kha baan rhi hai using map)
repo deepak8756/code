@@ -1,0 +1,87 @@
+//circular linked list hai ye check kro linked list hai ki nhi chahe singly ho ya doubly (aur cycle kha baan rhi hai wo jgah btao map seee kiya hai
+//waise to floyd's cycle detention algo see bhi kr skte hai but yha map see kiya hai
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+
+void insert(Node* &head,Node* &tail,int position,int value){
+    if(position==0){
+        Node* node1=new Node(10);
+        tail=node1;
+        head=node1;
+        node1->next=node1;
+    }
+    else{
+        Node* temp=tail;
+
+        while(temp->data!=position){
+            temp=temp->next;
+        }
+        Node* insert1=new Node(value);
+        insert1->next=temp->next;
+        temp->next=insert1;
+
+    }
+}
+void print(Node* &tail){
+    Node* temp=tail;
+    do{
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }while(temp!=tail);
+    cout<<endl;
+}
+void check(Node* head){//ye function pta kr rha hai ki circular hai ki nhi 
+    Node* temp=head->next;
+
+    while(temp!=NULL && temp!=head){
+        temp=temp->next;
+    }
+    if(temp==NULL){
+       cout<<"not circular"<<endl;
+    }
+    if(temp==head){
+        cout<<" circular"<<endl;
+    }
+    
+
+}
+bool detectcycle(Node* &head){//agar code meeh cycle baan rhi hai to print krao ye waise 
+//circular linked list hi hai but isse cycle pta kr skte hai aur kha baan rhi hai ye bhi
+    Node* temp=head;
+
+    map<Node*,bool> check;
+
+    while(temp!=NULL){
+    if(check[temp]==true){
+        cout<<"cycle is present at "<<temp->data<<endl;
+        return true;
+    }
+
+        check[temp]=true;
+        temp=temp->next;
+    }
+    return false; 
+}
+int main()
+{
+    Node* tail=NULL;
+    Node* head=NULL;
+    insert(head,tail,0,10);
+    print(tail);
+   // cout<<head->data<<endl;
+    insert(head,tail,10,20);
+    print(tail);
+    check(head);
+    detectcycle(head);
+    return 0;
+}
