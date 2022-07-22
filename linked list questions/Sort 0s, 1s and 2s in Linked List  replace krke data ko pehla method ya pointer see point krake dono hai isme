@@ -1,0 +1,235 @@
+//Sort 0s, 1s and 2s in Linked List using simple approach count krlo kitne zero one two hai aur unhe linked list meeh insert krdo line wise data ko 
+//replace kr rha hai yha pr...mtlb in short node meeh do cheez hoti hai ek data ek pointer to yha data change kr rhe hai pointer nhi
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+};
+ 
+void insertAtTail(Node* &tail,int data)
+{
+    Node* temp=new Node(data);
+    tail->next=temp;
+    tail=temp;
+}
+void print(Node* head)
+{
+    Node* temp=head;
+
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+
+void countAndInsert(Node* head)
+{
+//
+    int zero=0;
+    int one=0;
+    int two=0;
+    Node* temp=head;
+    while(temp!=NULL)
+    {//count kr rha hai iss while loop ki kitni baar kaun aya hai
+        if(temp->data==0)
+        {
+            zero++;
+        }
+        else if(temp->data==1)
+        {
+            one++;
+        }
+        else{
+            two++;
+        }
+        temp=temp->next;
+    }
+
+    //cout<<"zero is: "<<zero<<endl<<"one is: "<<one<<endl<<"two is: "<<two<<endl;
+
+    temp=head;
+    while(temp!=NULL)
+    {//ab jo jitni baar aya hai usko dalte chaal rha hai starting see 0 see fir pura 0 dalega jitne bhi zero honge then same kaam one fir two ke liye hoga
+        if(zero!=0)
+        {
+            temp->data=0;
+            zero--;
+        }
+        else if(one!=0)
+        {
+            temp->data=1;
+            one--;
+        }
+        else if(two!=0)
+        {
+            temp->data=2;
+            two--;
+        }
+        temp=temp->next;
+    }
+}
+int main()
+{
+    Node* node1=new Node(0);
+    Node* head=node1;
+    Node* tail=node1;
+
+    insertAtTail(tail,1);
+    insertAtTail(tail,0);
+    insertAtTail(tail,2);
+    insertAtTail(tail,1);
+    insertAtTail(tail,0);
+    insertAtTail(tail,2);
+    insertAtTail(tail,1);
+    insertAtTail(tail,0);
+    print(head);
+
+    countAndInsert(head);//count krlo kaun kitni baar aya hai..aur usko utni baar linked list meeh dalte jao
+    print(head);
+    return 0;
+}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//yha node bnake kr rhe hai data replacement nhi kr rhe mujhe pta hai linked list meeh zero one aur two hi hai .... to 3 new linked list bnali
+//zero,one aur two ki fir unme -1 see intialize krdo kyuki last meeh merge krne meeh asani hogi abb main wali linked list see jo bhi value aegi
+//zero one ya two unhe meeh jaisi value aegi waise meeh daal dung zero aai main wali linked ist see to zero wali linked list meeh next krke add krdunga
+//fir last meeh merge krdung isse mera data nhi replace hua maine point kra krake swal krliya aur upar wale meeh daa replace krderhe the
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+};
+ 
+void insertAtTail(Node* &tail,int data)
+{
+    Node* temp=new Node(data);
+    tail->next=temp;
+    tail=temp;
+}
+void print(Node* head)
+{
+    Node* temp=head;
+
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+
+//niche zero one two meeh insert krane ke liye jo function call horha hai wo yii hai
+// void insertNewTail(Node* &tail,Node* current)
+// {
+//     tail->next=current;
+//     tail=tail->next;   //yha check kro error if
+// }
+
+
+void replacePointer(Node* &head)
+{//.creating new node named ZERO,ONE,TWO, which is insert firstly at -1 why? because jab join
+// krenge to probl na ho isliye sabko -1 see start meeh initialize krdo aur isi ko tail bnado
+//kyuki tail see hi insert krenge agee inme.
+    Node* zero=new Node(-1);
+    Node* zerotail=zero;
+    Node* one=new Node(-1);
+    Node* onetail=one;
+    Node* two=new Node(-1);
+    Node* twotail=two;
+
+
+    Node* current=head;
+
+    while(current!=NULL)
+    {
+        int value=current->data;
+
+        if(value==0)
+        {//chahe function use krlo sabmee ya aisee likhlo sabmee jo shi lgee.
+        //teeno meeh yii kiya hai ya function use kro ya manually
+            //insertNewTail(zerotail,current);
+            zerotail->next=current;
+            zerotail=zerotail->next;
+        }
+        if(value==1)
+        {
+            //insertNewTail(onetail,current);
+            onetail->next=current;
+            onetail=onetail->next;
+        }
+        if(value==2)
+        {
+            //insertNewTail(twotail,current);
+            twotail->next=current;
+            twotail=twotail->next;
+        }
+        current=current->next;
+    }
+
+//hmne sari node  0's ,1's , 2's ko bna liya hai ab merge krdo sbko
+//.  check krlo one khali to nhi warna zerotail one ko point krega jo khali hai        
+        if(one->next!=NULL)
+        {
+            zerotail->next=one->next;
+        }
+        //agar khali hai to
+        else{
+            zerotail->next=two->next;
+        }
+
+        onetail->next=two->next;
+        twotail->next=NULL;
+
+        head=zero->next;
+        delete(zero);//ye zero ,one,two mere -1 ko point kr rhe hai jo start meeh dala
+        //tha node bnate time maine -1 daal lo baad meeh merge krane meeh asani rehti hai
+        //usse yha delete kr rhe hai.
+        delete(one);
+        delete(two);
+
+}
+
+int main()
+{
+    Node* node1=new Node(0);
+    Node* head=node1;
+    Node* tail=node1;
+
+    insertAtTail(tail,1);
+    insertAtTail(tail,0);
+    insertAtTail(tail,2);
+    insertAtTail(tail,1);
+    insertAtTail(tail,0);
+    insertAtTail(tail,2);
+    insertAtTail(tail,1);
+    insertAtTail(tail,0);
+    print(head);
+
+    replacePointer(head);
+    print(head);
+
+    //TIME COMPLEXITY O(N)----SPACE COMPLEXITY O(1);
+    return 0;
+}
