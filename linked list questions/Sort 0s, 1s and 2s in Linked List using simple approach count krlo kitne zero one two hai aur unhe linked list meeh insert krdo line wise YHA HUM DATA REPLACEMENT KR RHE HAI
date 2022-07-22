@@ -1,5 +1,5 @@
 //Sort 0s, 1s and 2s in Linked List using simple approach count krlo kitne zero one two hai aur unhe linked list meeh insert krdo line wise data ko 
-//replace kr rha hai yha pr
+//replace kr rha hai yha pr...mtlb in short node meeh do cheez hoti hai ek data ek pointer to yha data change kr rhe hai pointer nhi
 #include<bits/stdc++.h>
 using namespace std;
 
