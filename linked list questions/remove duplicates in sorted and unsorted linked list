@@ -1,0 +1,130 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+
+void insertAtTail(Node* &tail,int data)
+{
+    Node* temp=new Node(data);
+    tail->next=temp;
+    tail=temp;
+}
+void print(Node* head)
+{
+    Node* temp=head;
+
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+//sorted linked list ka function 
+
+void removeDuplicate(Node* &head)
+{
+    Node* temp=head;
+
+    while(temp->next!=NULL)
+    {
+        if(temp->data==temp->next->data)
+        {
+            Node* duplicate=temp->next;
+            temp->next=duplicate->next;
+            delete(duplicate);
+        }
+        else{
+            temp=temp->next;
+        }
+    }
+}
+
+//unsorted linked list ka function 
+void  removeDuplicate1(Node *head)
+{
+    Node* ptr1=head;
+    while(ptr1!=NULL)
+    {
+        Node* ptr2=ptr1;
+        while(ptr2->next!=NULL)
+        {
+            if(ptr1->data==ptr2->next->data)
+            {
+                Node* duplicate=ptr2->next;
+                ptr2->next=ptr2->next->next;
+                delete(duplicate);
+            }
+            else{
+                ptr2=ptr2->next;//ye ptr2 agle wale ka adress store kr rha assume 
+                //ptr2 abhi 1 hai
+                //ptr2=ptr->next; abb ptr2=2 hojaega iske hisab see
+                //abb line 63 meeh jo likha hai (ptr2->next->next)mtlb ptr2=2 tha aur ye uska
+                //bhi next bool rha hai mtlb iska ki ptr2=3ho; thoda smjho sii see
+
+            }
+        }
+        ptr1=ptr1->next;
+    }
+}
+
+
+int main()
+{
+    Node* node1=new Node(10);
+    Node* head=node1;
+    Node* tail=node1;
+
+    //ye wala usorted linked list ke function ko call krega duplicate htane ke liye removeDuplicate1(wala) line 103
+
+    insertAtTail(tail,20);
+    print(head);
+    insertAtTail(tail,30);
+    print(head);
+    insertAtTail(tail,20);
+    print(head);
+    insertAtTail(tail,40);
+    print(head);
+    insertAtTail(tail,50);
+    print(head);
+    insertAtTail(tail,10);
+    print(head);
+    insertAtTail(tail,30);
+    print(head);
+    insertAtTail(tail,10);
+    
+    removeDuplicate1(head);
+    print(head);
+    
+    // print(head);
+    //-----------------------------------------------------
+    //ye wala sorted linked list ke function ko call krega duplicate htane ke liye removeDuplicate(wala) line 125
+    // insertAtTail(tail,10);
+    // print(head);
+    // insertAtTail(tail,10);
+    // print(head);
+    // insertAtTail(tail,20);
+    // print(head);
+    // insertAtTail(tail,20);
+    // print(head);
+    // insertAtTail(tail,20);
+    // print(head);
+    // insertAtTail(tail,30);
+    // print(head);
+    // insertAtTail(tail,30);
+    // print(head);
+    // insertAtTail(tail,50);
+    // print(head);
+    
+    // removeDuplicate(head);
+    // print(head);
+    return 0;
+}
