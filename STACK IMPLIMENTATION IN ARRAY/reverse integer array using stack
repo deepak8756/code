@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Stack{
+   public:
+   int top;
+   int *arr;
+   int size;
+
+
+   Stack(int s){
+      this->size=s;
+      top=-1;
+      arr=new int[s];
+   }
+
+   void push(int element){
+      if(size - top >1){
+         top++;
+         arr[top]=element;
+      }
+      else{
+         cout<<"Stack Overflow "<<endl;
+      }
+   }
+
+   int pop(){
+      if(top>=0)
+      {
+         int no=arr[top];
+         top--;
+         return no;
+      }
+      else{
+         cout<<" Stack Underflow "<<endl;
+         return 0;
+      }
+   }
+};
+
+int main()
+{
+   int n;
+   cin>>n;
+   int a[n];
+   for(int i=0;i<n;i++)
+   {
+      cin>>a[i];
+   }
+
+   Stack st(n);
+
+   for(int i=0;i<n;i++)
+   {
+      st.push(a[i]);
+   }
+
+   vector<int>v;
+   for(int i=0;i<n;i++)
+   {
+      v.push_back(st.pop());
+   }
+
+    for(int i=0;i<n;i++)
+   {
+      cout<<v[i]<<" ";
+   }
+
+
+   
+
+   return 0;
+}
