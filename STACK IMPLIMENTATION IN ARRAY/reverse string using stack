@@ -1,0 +1,68 @@
+//stack jab pop krta hai to waise b ulta hi krta hai mujhe bass jab wo pop krega usee ek string meeh store krana hai
+#include<bits/stdc++.h>
+using namespace std;
+
+class Stack{
+   public:
+   int size;
+   char *arr;
+   int top;
+
+   Stack(int s){
+      this->size=s;
+      arr=new char[s];
+      top=-1;
+
+   }
+   void push(char a){
+      if(size - top >1){
+         top++;
+         arr[top]=a;
+      }
+      else{
+         cout<<"Stack overflow "<<endl;
+      }
+   }
+
+   char pop(){
+      if(top>=0)
+      {
+         char b=arr[top];
+         top--;
+         return b;
+      }
+      else{
+         cout<<" Stack Underflow "<<endl;
+      }
+      return 0;
+   }
+
+
+};
+
+int main()
+{
+   string str="";
+   Stack st(6);
+
+   st.push('h');
+   
+   st.push('e');
+   st.push('l');
+   st.push('l');
+   st.push('o');
+   str+=st.pop();
+   str+=st.pop();
+   str+=st.pop();
+   str+=st.pop();
+   str+=st.pop();
+   str+=st.pop();
+
+   cout<<str<<endl;
+
+ 
+
+
+
+   return 0;
+}
