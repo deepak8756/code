@@ -1,0 +1,28 @@
+//QUESTION1: REVERSE A STRING:--
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   stack<char> s;//iska mtlb hai ye khud see ek character bna rha hai
+   string str;
+   cin>>str;
+
+   for(int i=0;i<str.length();i++)
+   {
+      char ch=str[i];
+      s.push(ch);push krr rha hai string ko ek ek krke jo upar abhi input liya hu str see
+   }
+   string ans="";
+   while(!s.empty()){//jab taak s(stack)empty na ho tab taak chalo
+      char ch =s.top();//stack ke top par jo bhi usse ch meeh store kradiya
+      ans+=ch;//upar jo value ch meeh stroe kraya tha usse ans meeh rkh liya
+      
+      s.pop();//pop kradiya upar wali jo value hogi wo pop ab jo new aai hogi wo top baan gai hogi STACK MEEH POP HMESHA TOP SEE HOTA HAI 
+   }
+   cout<<ans<<endl;
+   return 0;
+}
+//.............................................................................................................................................................
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
