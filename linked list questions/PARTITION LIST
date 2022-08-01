@@ -54,6 +54,8 @@ Node* insert(Node* head,int b){
       temp=temp->next;
    }
   
+  
+  //dono node ko join krdo f1 wo hai jisme b see kaam jitne no hai wo----f2 wo hai jisme b see greater no hai saree
    f1->next=secnode->next;
    f2->next=NULL;
       print(head1->next);
