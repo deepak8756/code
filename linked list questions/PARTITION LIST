@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+   public:
+   int data;
+   Node* next;
+
+   Node(int data){
+      this->data=data;
+      this->next=NULL;
+   }
+};
+
+void insertAtTail(Node* &tail,int data){
+   Node* temp=new Node(data);
+
+   tail->next=temp;
+   tail=temp;
+
+}
+void print(Node* head){
+   Node* temp=head;
+
+   while(temp!=NULL){
+      cout<<temp->data<<" ";
+      temp=temp->next;
+   }
+   cout<<endl;
+}
+
+Node* insert(Node* head,int b){
+   Node* temp=head;
+
+   Node* firstnode=new Node(0);
+   Node* head1=firstnode;//isko head1 dediya pehle wale ko bakki niche wala agee jake insert krega
+   Node* f1=firstnode;
+
+   Node* secnode=new Node(0);
+   Node* head2=secnode;
+   Node* f2=secnode;
+
+
+   while(temp!=NULL)
+   {
+      if(temp->data<b){
+         f1->next=temp;
+         f1=f1->next;
+      }
+      else{
+         f2->next=temp;
+         f2=f2->next;
+      }
+      temp=temp->next;
+   }
+  
+   f1->next=secnode->next;
+   f2->next=NULL;
+      print(head1->next);
+
+
+   
+
+    return firstnode;
+
+
+
+
+}
+int main()
+{
+   Node* node1= new Node(1);
+   Node* head=node1;
+   Node* tail=node1;
+
+   insertAtTail(tail,4);
+   //print(head);
+   insertAtTail(tail,3);
+   //print(head);
+   insertAtTail(tail,2);
+   //print(head);
+   insertAtTail(tail,5);
+   //print(head);
+   insertAtTail(tail,2);
+   //print(head);
+
+   int b=3;
+  
+
+  insert(head,b);
+   
+   
+   return 0;
+}
