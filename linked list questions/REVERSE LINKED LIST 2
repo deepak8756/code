@@ -1,0 +1,138 @@
+//ex:- 1->2->3->4->5
+//m=2, n=4     m kuch b hoskta hai ,n kuch bhi hoskta hai bass m chotta rhega hmesha n see   
+//ans= 1->4->3->2->5 
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+
+};
+void insertAtTail(Node* &tail,int data){
+    Node* temp=new Node(data);
+
+    tail->next=temp;
+    tail=temp;
+}
+
+void print(Node* head){
+    Node* temp=head;
+
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+void reverse(Node* head,int m,int n)
+{
+    Node* startprev=head;
+    Node* start=head;
+    int counter=1;
+
+    while(counter<m)
+    {
+        startprev=start;
+        start=start->next;
+        counter++;
+    }
+    cout<<" start ka data (m) : "<<start->data<<endl;
+    cout<<" startprev ka data : "<<startprev->data<<endl;
+    //start nikal liya aur start ke piche wala nikal liya  upar
+
+    Node* end=head;
+    
+    counter=1;
+    while(counter<n){
+        end=end->next;
+        counter++;
+    }
+
+      cout<<" end ka data (n) :"<<end->data<<endl;
+       Node* endnext=NULL;
+      if(end->next!=NULL){
+    endnext=end->next;//endnext node ke andar end ka next bhar liya 
+     cout<<" end ka data (n) :"<<end->data<<endl;
+      }
+ 
+
+
+    //=============================================================================
+    //cout<<endnext->data<<endl;
+    end->next=NULL;
+
+    Node* current=start;
+    Node* prev=NULL;
+    Node* next=NULL;
+
+    while(current!=NULL)
+    {
+        next=current->next;
+        current->next=prev;
+        prev=current;
+        current=next;
+    }
+    cout<<prev->data<<endl;
+
+    
+    if(startprev==head && start==head)
+    {
+        head=prev;
+    }
+    else
+    startprev->next=prev;
+    
+
+    if(endnext==NULL)
+    {
+        start->next=NULL;
+    }
+    else{
+        start->next=endnext;
+    }
+    print(head);
+
+    
+
+
+
+
+
+}
+int main()
+{
+    Node* node1=new Node(1);
+    Node* head=node1;
+    Node* tail=node1;
+
+    insertAtTail(tail,2);
+    insertAtTail(tail,3);
+    insertAtTail(tail,4);
+    insertAtTail(tail,5);
+    insertAtTail(tail,60);
+    insertAtTail(tail,70);
+    insertAtTail(tail,80);
+    insertAtTail(tail,90);
+    print(head);
+
+    int m,n;
+    cout<<"Enter m "<<" and "<<"Enter n :"<<endl;
+    cin>>m>>n;
+
+    reverse(head,m,n);
+
+    
+    return 0;
+}
